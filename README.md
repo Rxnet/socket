@@ -1,14 +1,26 @@
 # Socket observable
-ReactPHP socket client and server with ReactiveX flavour.
+Ultra thin ReactPHP socket adapter to bring ReactiveX flavour.
 
 ## Client
-Here is a low level socket that connect to remote or throw an exception  
+Low level socket that connect to remote or throw an exception  
 Then echo the received data has they arrive
 
 ```php
 <?php
 $connector = new \Rxnet\Socket\Connector($loop);
-$connector->connect('www.google.fr:80')
+$options = [
+    // See http://php.net/manual/en/context.socket.php for all tcp options
+    'tcp'=> [
+        'backlog' => 200,
+        'so_reuseport' => true,
+        'ipv6_v6only' => true
+    ],
+    // see http://php.net/manual/en/context.ssl.php for all ssl options
+    'tls' => [
+        'verify_peer' => false
+    ]
+];
+$connector->connect('www.google.fr:80', $options)
     ->timeout(100)
     ->subscribe(
         function (\Rxnet\Socket\Connection $connection) use ($loop) {
