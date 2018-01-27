@@ -1,0 +1,27 @@
+{
+    "name": "rxnet/socket",
+    "description": "ReactiveX client and server socket",
+    "type": "library",
+    "keywords": [
+        "socket",
+        "tcp",
+        "reactphp",
+        "reactivex"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vincent Vermersch",
+            "email": "vermersch@gmail.com"
+        }
+    ],
+    "require": {
+        "react/socket": "^0.8.9",
+        "reactivex/rxphp": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rxnet\\Socket\\" : "src/Socket"
+        }
+    }
+}
