@@ -1,13 +1,11 @@
 <?php
 require_once '../vendor/autoload.php';
 
-$loop = \React\EventLoop\Factory::create();
-
-\Rx\Scheduler::setDefaultFactory(function() use($loop){
-    return new \Rx\Scheduler\EventLoopScheduler($loop);
+\Rx\Scheduler::setDefaultFactory(function() {
+    return new \Rx\Scheduler\EventLoopScheduler(EventLoop\getLoop());
 });
 
-$server = new \Rxnet\Socket\Server($loop);
+$server = new \Rxnet\Socket\Server();
 
 $server->listen('0.0.0.0:9999')
     ->subscribe(function(\Rxnet\Socket\Connection $connection) {
@@ -21,5 +19,3 @@ $server->listen('0.0.0.0:9999')
     });
 
 echo "Server listening on port 9999 \n";
-
-$loop->run();

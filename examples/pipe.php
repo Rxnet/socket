@@ -1,19 +1,17 @@
 <?php
 require_once '../vendor/autoload.php';
 
-$loop = \React\EventLoop\Factory::create();
-
-\Rx\Scheduler::setDefaultFactory(function () use ($loop) {
-    return new \Rx\Scheduler\EventLoopScheduler($loop);
+\Rx\Scheduler::setDefaultFactory(function () {
+    return new \Rx\Scheduler\EventLoopScheduler(\EventLoop\getLoop());
 });
 
-$server = new \Rxnet\Socket\Server($loop);
+$server = new \Rxnet\Socket\Server();
 
 $server->listen('0.0.0.0:9999')
-    ->subscribe(function (\Rxnet\Socket\Connection $client) use ($loop) {
+    ->subscribe(function (\Rxnet\Socket\Connection $client) {
         echo "Received connection from {$client->getRemoteAddress()} \n";
 
-        $connector = new \Rxnet\Socket\Connector($loop);
+        $connector = new \Rxnet\Socket\Connector();
         $connector->connect('www.google.fr:80')
             ->subscribe(new \Rx\Observer\CallbackObserver(
                     function (\Rxnet\Socket\Connection $connection) use ($client) {
@@ -27,5 +25,3 @@ $server->listen('0.0.0.0:9999')
     });
 
 echo "Server listening on port 9999 \n";
-
-$loop->run();

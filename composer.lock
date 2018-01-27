@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a3550bddb983cf9245f45afa76d4ae8",
+    "content-hash": "1b217a4ac6d9fbc17bee047fc6402591",
     "packages": [
         {
             "name": "evenement/evenement",
@@ -433,6 +433,59 @@
                 "rx"
             ],
             "time": "2017-11-02T20:58:41+00:00"
+        },
+        {
+            "name": "voryx/event-loop",
+            "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/voryx/event-loop.git",
+                "reference": "4cd6bc28465303bf6da63202201463e420d4ec79"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/voryx/event-loop/zipball/4cd6bc28465303bf6da63202201463e420d4ec79",
+                "reference": "4cd6bc28465303bf6da63202201463e420d4ec79",
+                "shasum": ""
+            },
+            "require": {
+                "react/event-loop": "^0.4.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EventLoop\\": "src"
+                },
+                "files": [
+                    "src/functions.php",
+                    "src/bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matt Bonneau",
+                    "email": "matt@bonneau.net",
+                    "role": "Developer"
+                },
+                {
+                    "name": "David Dan",
+                    "email": "davidwdan@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Global static wrapper for react event-loop",
+            "keywords": [
+                "event-loop",
+                "eventloop",
+                "global",
+                "static",
+                "timer"
+            ],
+            "time": "2017-03-14T01:10:32+00:00"
         }
     ],
     "packages-dev": [],

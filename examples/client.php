@@ -1,20 +1,19 @@
 <?php
 require_once '../vendor/autoload.php';
 
-$loop = \React\EventLoop\Factory::create();
-\Rx\Scheduler::setDefaultFactory(function () use ($loop) {
-    return new \Rx\Scheduler\EventLoopScheduler($loop);
+\Rx\Scheduler::setDefaultFactory(function () {
+    return new \Rx\Scheduler\EventLoopScheduler(EventLoop\getLoop());
 });
 
-$connector = new \Rxnet\Socket\Connector($loop);
+$connector = new \Rxnet\Socket\Connector();
 
 $connector->connect('www.google.fr:80')
     ->timeout(100)
     ->subscribe(new \Rx\Observer\CallbackObserver(
-            function (\Rxnet\Socket\Connection $connection) use ($loop) {
+            function (\Rxnet\Socket\Connection $connection) {
                 echo "connected to {$connection->getRemoteAddress()} \n";
                 $connection
-                    ->subscribe(new \Rx\Observer\CallbackObserver(
+                    ->subscribe(
                         function ($data) {
                             echo '.';
                             //var_dump($data);
@@ -25,12 +24,10 @@ $connector->connect('www.google.fr:80')
                         function () {
                             echo 'completed';
                         }
-                    ));
-                $loop->addTimer(.1, function () use ($connection) {
+                    );
+                \EventLoop\addTimer(.1, function () use ($connection) {
                     $connection->write("GET /?gfe_rd=cr&dcr=0&ei=YWhsWsTDIZOm8wep_beACA HTTP/1.0\r\nHost: www.google.fr\r\n\r\n");
                 });
 
             })
     );
-
-$loop->run();
