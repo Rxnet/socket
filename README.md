@@ -1,4 +1,6 @@
 # Socket observable
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FRxnet%2Fsocket.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FRxnet%2Fsocket?ref=badge_shield)
+
 Ultra thin ReactPHP socket adapter to bring ReactiveX flavour.
 
 ## Client
@@ -63,3 +65,7 @@ $server->listen('0.0.0.0:9999')
 
 ## Pipe
 A Connection is an Observable and an Observer, you can subscribe a connection to another to pipe data.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FRxnet%2Fsocket.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FRxnet%2Fsocket?ref=badge_large)
